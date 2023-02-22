@@ -2,20 +2,20 @@ sudo: required
 services:
   - docker
 before_install:
-  - docker build -t effyhou/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t monkeyapple/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true effyhou/react-test npm test
+  - docker run -e CI=true monkeyapple/react-test npm test
 
 after_success:
-  - docker build -t effyhou/multi-client ./client
-  - docker build -t effyhou/multi-nginx ./nginx
-  - docker build -t effyhou/multi-server ./server
-  - docker build -t effyhou/multi-worker ./worker
+  - docker build -t monkeyapple/multi-client ./client
+  - docker build -t monkeyapple/multi-nginx ./nginx
+  - docker build -t monkeyapple/multi-server ./server
+  - docker build -t monkeyapple/multi-worker ./worker
   #Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   #Take those images and push them to docker hub
-  - docker push effyhou/multi-client
-  - docker push effyhou/multi-nginx
-  - docker push effyhou/multi-server
-  - docker push effyhou/multi-worker
+  - docker push monkeyapple/multi-client
+  - docker push monkeyapple/multi-nginx
+  - docker push monkeyapple/multi-server
+  - docker push monkeyapple/multi-worker
